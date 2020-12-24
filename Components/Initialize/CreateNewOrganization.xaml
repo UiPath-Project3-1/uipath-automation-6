@@ -1,28 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Activity mc:Ignorable="sap sap2010" x:Class="CreateNewOrganization" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ro="clr-namespace:Revature_GitHub_ActivityLibrary.Organizations;assembly=Revature_GitHub_ActivityLibrary" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="CreateNewOrganization" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ro="clr-namespace:Revature_GitHub_ActivityLibrary.Organizations;assembly=Revature_GitHub_ActivityLibrary" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:si="clr-namespace:System.IO;assembly=System" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_Credential" Type="InArgument(x:String)" />
     <x:Property Name="in_ContactEmail" Type="InArgument(x:String)" />
-    <x:Property Name="in_OrganizationName" Type="InArgument(x:String)" />
     <x:Property Name="in_BusinessName" Type="InArgument(x:String)" />
     <x:Property Name="in_Browser" Type="InArgument(ui:UiElement)" />
+    <x:Property Name="io_OrganizationName" Type="InOutArgument(x:String)" />
   </x:Members>
   <this:CreateNewOrganization.in_ContactEmail>
     <InArgument x:TypeArguments="x:String" />
   </this:CreateNewOrganization.in_ContactEmail>
-  <this:CreateNewOrganization.in_OrganizationName>
-    <InArgument x:TypeArguments="x:String" />
-  </this:CreateNewOrganization.in_OrganizationName>
   <this:CreateNewOrganization.in_BusinessName>
     <InArgument x:TypeArguments="x:String" />
   </this:CreateNewOrganization.in_BusinessName>
   <this:CreateNewOrganization.in_Browser>
     <InArgument x:TypeArguments="ui:UiElement" />
   </this:CreateNewOrganization.in_Browser>
-  <sap:VirtualizedContainerService.HintSize>1697,1056</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1016,1305</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="28">
+    <scg:List x:TypeArguments="x:String" Capacity="35">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System</x:String>
@@ -51,10 +47,17 @@
       <x:String>System.IO</x:String>
       <x:String>System.Net.Mail</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="72">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="37">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -91,10 +94,10 @@
       <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="This sequence creates a new Github organization. It will open its own browser and log the user into Github using the credential passed in. Then, it will navigate to the necessary pages and create the new organization with the information passed in as arguments.&#xA;&#xA;Preconditions: N/A" DisplayName="Create New Github Organization" sap:VirtualizedContainerService.HintSize="476,951" sap2010:WorkflowViewState.IdRef="Sequence_3">
+  <Sequence sap2010:Annotation.AnnotationText="This sequence creates a new Github organization. It will open its own browser and log the user into Github using the credential passed in. Then, it will navigate to the necessary pages and create the new organization with the information passed in as arguments.&#xA;&#xA;Preconditions: N/A" DisplayName="Create New Github Organization" sap:VirtualizedContainerService.HintSize="556,1200" sap2010:WorkflowViewState.IdRef="Sequence_3">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="Username" />
       <Variable x:TypeArguments="ss:SecureString" Name="Password" />
@@ -106,20 +109,20 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetAppCredentials workflow" sap:VirtualizedContainerService.HintSize="434,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Framework\GetAppCredentials.xaml">
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetAppCredentials workflow" sap:VirtualizedContainerService.HintSize="514,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Framework\GetAppCredentials.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <OutArgument x:TypeArguments="x:String" x:Key="out_Username">[Username]</OutArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_Credential">[in_Credential]</InArgument>
         <OutArgument x:TypeArguments="ss:SecureString" x:Key="out_Password">[Password]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Open new Edge Browser" sap:VirtualizedContainerService.HintSize="434,605" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InUiElement="[in_Browser]" InteractionMode="Simulate" OutUiElement="[Browser]" Version="V1">
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Open new Edge Browser" sap:VirtualizedContainerService.HintSize="514,869" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InUiElement="[in_Browser]" InteractionMode="Simulate" OutUiElement="[Browser]" Version="V1">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do - Create new Org" sap:VirtualizedContainerService.HintSize="376,389" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Do - Create new Org" sap:VirtualizedContainerService.HintSize="480,653" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:Boolean" Name="IsLoggedIn" />
             </Sequence.Variables>
@@ -128,14 +131,68 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GitHub_Login workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Components\Initialize\GitHub_Login.xaml">
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GitHub_Login workflow" sap:VirtualizedContainerService.HintSize="438,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Components\Initialize\GitHub_Login.xaml">
               <ui:InvokeWorkflowFile.Arguments>
                 <InArgument x:TypeArguments="ui:UiElement" x:Key="in_Application">[Browser]</InArgument>
                 <InArgument x:TypeArguments="x:String" x:Key="in_Credential">[in_Credential]</InArgument>
               </ui:InvokeWorkflowFile.Arguments>
             </ui:InvokeWorkflowFile>
-            <uix:NGoToUrl DisplayName="Go To URL - Needs to change to new activity" sap:VirtualizedContainerService.HintSize="334,81" sap2010:WorkflowViewState.IdRef="NGoToUrl_1" Url="https://github.com/organizations/plan" />
-            <ro:GitHub_Web_CreateFreeOrg DisplayName="Create New Organization" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="GitHub_Web_CreateFreeOrg_1" in_Browser="[Browser]" in_ContactEmail="[in_ContactEmail]" in_OptionalInstitutionName="[in_BusinessName]" in_OrgName="[in_OrganizationName]" />
+            <uix:NGoToUrl DisplayName="Go To URL - Needs to change to new activity" sap:VirtualizedContainerService.HintSize="438,81" sap2010:WorkflowViewState.IdRef="NGoToUrl_1" Url="https://github.com/organizations/plan" />
+            <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="460,851" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+              <TryCatch.Try>
+                <ro:GitHub_Web_CreateFreeOrg DisplayName="Create New Organization" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="GitHub_Web_CreateFreeOrg_1" in_Browser="[Browser]" in_ContactEmail="[in_ContactEmail]" in_OptionalInstitutionName="[in_BusinessName]" in_OrgName="[io_OrganizationName]" />
+              </TryCatch.Try>
+              <TryCatch.Catches>
+                <Catch x:TypeArguments="si:InvalidDataException" sap:VirtualizedContainerService.HintSize="426,689" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ActivityAction x:TypeArguments="si:InvalidDataException">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="si:InvalidDataException" Name="exception" />
+                    </ActivityAction.Argument>
+                    <uix:NCheckState Exists="{x:Null}" DisplayName="Check App State - Next Button Clickable" EnableIfExists="False" sap:VirtualizedContainerService.HintSize="420,620" sap2010:WorkflowViewState.IdRef="NCheckState_1" Timeout="5">
+                      <uix:NCheckState.IfExists>
+                        <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="250,84" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </Sequence>
+                      </uix:NCheckState.IfExists>
+                      <uix:NCheckState.IfNotExists>
+                        <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="376,394" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="334,238" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Please Input An Organization Name That Is NOT Taken" Title="Organization Name">
+                            <ui:InputDialog.Result>
+                              <OutArgument x:TypeArguments="x:String">[io_OrganizationName]</OutArgument>
+                            </ui:InputDialog.Result>
+                          </ui:InputDialog>
+                          <ro:GitHub_Web_CreateFreeOrg sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="GitHub_Web_CreateFreeOrg_2" in_Browser="[Browser]" in_ContactEmail="[in_ContactEmail]" in_OptionalInstitutionName="[in_BusinessName]" in_OrgName="[io_OrganizationName]" />
+                        </Sequence>
+                      </uix:NCheckState.IfNotExists>
+                      <uix:NCheckState.Target>
+                        <uix:TargetAnchorable BrowserURL="https://github.com/account/organizations/new?coupon=&amp;plan=team_free" DesignTimeRectangle="696, 691, 544, 55" ElementType="Button" FriendlyName="'Next'" FullSelectorArgument="&lt;webctrl parentid='org-new-form' tag='BUTTON' type='submit' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='org-new-form' tag='BUTTON' type='submit' aaname='   Next ' check:text='Next' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAiQAAAA7CAYAAABL7JEXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPVSURBVHhe7ds/SxxpHMDxewMJXpUyL8Eive8i5XWSLqTIksruGot0FlccWNhImivkuCIpDuGKIOHAIhyCOYQjiIrJRpN147r7u3lmVp2dnc4/T+Fn4ENmdv6l/PJ7xh/u/fggAAByEiQAQHatQXJ/7kXMPNmImecfY6azCwBwNakpirZIjdHWHpNB8vBRFSLPPrQ/DADgKlJjFK2RmqPeIBNBUsZI280AANcpRUmtQS6CpFymMRkBAG5D0Rz15ZuLIDEdAQBuVW1KchkkPmAFAG5T0R7TQdJ2IQDADRIkAEB2ggQAyE6QAADZCRIAIDtBAgBkJ0gAgOwECQCQnSABALITJABAdoIEAMhOkAAA2QkSACA7QQIAZCdIAIDsBAkAkJ0gAQCyEyRAw1Gs96Lc9t53G+d6sVX83t0+avwOcDWCBGi4DJKIs1hbrp+7viCZf3sa3cEw1tfazwN3iyABGsZB0h9Gd1j8e3ASjy/OXV+QLGynhwsSoCJIgIZxkPS+x9LmWbEziq23h+NzzSDZj867QXQHxY9pGwxj869P5bmn71NwROz8Pb73VT/2iuP+znH8lnbqW/GuhfJ5wF0lSICGyyBZ6HTj9VGxPziNpcV0bjJIHm8Mop+Od75FZ/U41g5GxdEwXr8aP+drcdg/jZeLh7FS1kja34255c+xtFNNSDb+/BzzK4cxO/X/AO4SQQI01IOkOK5NNmYnguRLFRxH/Xh6fu9qdW1360t1vPY9usXx3m4Kl1Fsru+P32HJBpgkSICGRpAUFrbG8fD7SS1Iqjhp2+pLOkv/palJsR2cxNzFOwQJMEmQAA3TQTKzOP7t67CceExMSLr9WFj9HPM1P/0ynoScT0jKr2NT0JiQAO0ECdDQEiSF2Ten5fciaTufgFSTk1Hs/duLn1OM/NGL9YPTWEn3pIhJwVI+p/bM8luU3eiU90bs/HMcv77rRWf8HuBuEiRAQ3uQpOWXlzvV8svlksynWNo+q/48OG3DUXT3Tor79scTkFFsvKmmIrPrVdCke8sPWJe/xWZ6T9qO+oIE7jhBAgBkJ0gAgOwECQCQnSABALITJABAdoIEAMhOkAAA2QkSACA7QQIAZCdIAIDsBAkAkJ0gAQCyEyQAQHaCBADITpAAANkJEgAgu+kgef6x9UIAgBtRtMd0kDzZaL8YAOAmFO0xFST3517EzLMP7TcAAFynojlSe0wFSWJKAgDcitp0JJkIknsPH1VRYlICANyE1BgpRormqDfIZJCMlcs3KUx86AoAXIfUFEVb1Jdp6lqDBADgNgkSACCzB/E/Bd1CWZFb5RkAAAAASUVORK5CYII=" InformativeScreenshot="c995fa0ea9fb72e90921546649cd5b9d.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='Set up your team' /&gt;" SearchSteps="FuzzySelector" Text="Next" TextMethod="AttributeText" TextSelector="&lt;webctrl tag='BUTTON' type='submit' /&gt;">
+                          <uix:TargetAnchorable.Anchors>
+                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                              <uix:Target DesignTimeRectangle="696, 415, 544, 36" ElementType="Text" FriendlyName="'This will'" FullSelectorArgument="&lt;webctrl id='description_d621e86a713a' tag='P' /&gt;" FuzzySelectorArgument="&lt;webctrl id='description_d621e86a713a' tag='P' type='' aaname='      ' check:text='This will be the name of your account on GitHub.&amp;#xA;    Your URL will be: https://github.com/1aaa121.' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAiQAAAAoCAYAAADOruEiAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAuZSURBVHhe7Z3fa1zHFcf7B9gPxgSxNXqIa4wMirFoY3AaNrQlMUWN+yZMUbCdhxXdmhQZgghLUYxMbOM62KJ+8YP/1emc+fmdM3PvruRdrSV/Hz5w586Zc86cmZ1zdHd9/ZvzF1ZMwW83zPnf/c2cu3bfnFv/pzn32b8IIYQQQt4PqSlsbSE1hqs1VP1RFySEEEIIIScMCxJCCCGELB0WJIQQQghZOixICCGEELJ0WJAQQgghZOmwICGEEELI0gkFyYbZOnhnXvxP89Jsra+Y4e47M/66Hnz+wqYZB5m67zigPrmemKHcXx+ZycHIXG3KB5l50WnrDCFzdOs759iRI1B/5ibb/p/BXd1+aV7sbir5wNeTRp/9HMyyZz+GvU0IObXUT0gaB153QbJITqogkcQARdVHcGgvZz1PC2o/LATZt3oN7L1WEaL3IwsSQsgZhQUJCxJSsPiC5EjxZ0FCCPlIOEJBIsk/PF5O/VgQlI+gqwO30Otlk4wclK4P9cH1tIJEdAe78bF30hvut7+eKH12/gVbQ3ls7u6XyUliEeULW4napxwL6WuN12PEV/CtmPuUOEfAPs4B/S/XWa2JpfjqoENftV+gLeMn2yM/58KW0Ih9R1/yCX1IMenSI/dx7bDdtUZ9PkW6Zbo/J0iwXd3P+LjZvVHs3+CjjrfD6ozx0J8VbFd7u1xvQghZJjMXJDmhy4GqDvaOcQXVwWgP3SCfDuDisIZrfcgmRAYPfvBNj+n0TyUuGWd1xmIBk7JPOB3jEsonsdvpO841j3E2U4x9AswJE22iDkBs4n03p9wu5wEUMQJbffp0XKHt59Hwr6Kcl/hXFXtqDh4fG5TNY3WssN23Rnoc0mfPX7c/J4Del2G/YQGTPw8NebcWQR6JMi392GdlC90zrQ8hhCyeY31lk9uQEPVhV5EPejlw3V+S4aAc7mKiwAMddOMhm0B5TzrMWwd3U4dKQNpWavtkpHXWiV37VLZ9ko7jW/O2qDUo413a109wBB/f8h6uoV7PDPgBcejVp/cLtNNaxD6NWiNvQ8fP09ZlZfWaFuuFscG2toFtPQ7ps1fHtR3n9vycnlkLEvX5LPzS8tjWfZbuvUAIISfL/AqSgBymObmUxIN2uOvH+EIED3nUB9eNg9TTtp8KkurgbnGUgqQrUSHap9x2sUk+9SRI5XtfvFuIHR1/XMO+JBTHoo5efTrO0JZxnQWJyEGck76OtW77bOOhZTvXqyfeRbtvnfvs1T62fRb9jfuipxU3HY/mvga/tDy2dZ+l7SMhhJw8cy9IHM1D0+IO3Un+1wRWzn11k5IW6oPrxkGa5dE3aYdkImNaj8wrVALStqAt827Oq0DHJLdlfJFojvyExCezziQfkfGoz9nKbb2eBSK7O7J2lD9d+hq6o+99BYn05TniOnbMUfvgqGUxxjPHu2ir/VAw3R7GVbcThS9wrxU3uY/7Ue0Nj/U/ychcsm4X59in7bp2mHdTLyGEnBzzK0hcwoiP33XiiPgDPesqD88yMcC1PpQTXmZs/Skf+wcKn8pEgrhDW2Rk3tpW0fb+Z52teeIcVNslgDDWJvxx11/sag3K+Iss+NCMC8zJUSa/zkTpqJOuME1f7BvbgjP6XiTWCpyHX8OuOcb7hQ9p3ioeuHdnjbdqF/shyaBs0Klkuj8nDdA3R45pGbe855yuZuFgfYJ9gHGSPwDS/nV7WeJQ22zrJYSQk6MuSMhHjiTAsuAghBBCFg0LElIifyl3PHUhhBBCFgULEhKIXw3gVxmEEELIycCChBBCCCFLhwUJIYQQQpYOCxJCCCGELB0WJIQQQghZOixICCGEELJ0WJAQQgghZOmkgkTeKqnfqtn/Rs/3oHj7aQTflqnfiFr60f8G0FkRe+EFYOhP0zehfJvn+zFPXcejjuFsL0Rr7RPsO/J+6Yz3MgjrMlg3G38dmfHjtwt4e+klM7jxF3Nn9MTsH+Z4D26NzL+fWXuy31+9NuNv1738Qn0hhJAPh/yEpEoM9nBeVKKYqSCB5CjykMDnU5AA6E9ngjy5gkQn9vkXhg37x3h1+Fz87Iz3yRP31dXt52Z/MjF7z21xMPciYNPsvHppxj/K693zHh/aAmXryw2zennD3Pxe+p6bO5fFp0X6QgghHw7FVzaYUOae9JGjFiSqzYLkPbHFh46f/5+XQWYGzlZBInsM10TaCywCpADE/0vmIvRJTLBv0b4QQsgHQPkbkvTa8DJhSqJJX59A8uhLSL5oGFk9jYP0qAWJkp9akBR/7fvDPPkpulwf2EP9Td+EIO8SiY9F4YOMizHqmkei1hX907H+top9nx8hcYX7XmftQ118WJ3FnMVG1DMxWxDvuMatPeH7YGxcAx3TRryH1kbUl9ZKgTbTnIu441gdJ1kTiE8x36Cn2KdBNt67vGm+/zl8pWLZ//E7c80VEV+YO5PX5umhv//08Q/m1qrXcX3ridl/Fey9emnufXUl6LY4v1p7Y8UMbk/M0/CExN9TvhBCyBlE/ajVJ6+xTViYgPAglGIgtmNyin3YdnIuCeT+hE5QjpBA3DUkDkHJTi1IqoRn5YPPeSzYq+S1b0JItCkW0g4JRY+RZOPkfDzbBQnoEnkY3xfXXj+S3SgrKB8a8yvj6WOf294e7ofoS8vPvOY98dHxBv2+Xe8b3HcJJ4vxBZsqTn4/xj4/x+4YZ5lkc/C5uX7jirkg12sPzJ7VvfMnkVsz126um0+kOFm5bXZ+tXO563//sXpjaD4diMwlc+uhLWYePzCfRv0dBcmF39s52eJmsv053Fe+EELIGUQVJBZ3UGJhoJODHPT+XishxXZv0aATlCPr9XYxsZQHd69uRx4vsu6v9mAvPx0AezpBVr4J6J8n+eFiJskYaOqIaF1luy+uvX64BI3FRI2PB97Ta9yj316jL/1+QlvHdEq8tZ5yPwA27nqu2Vc1D1WslTasbLVeYhOKgIvr5s/3fzZ7z9+kpyF+/BWzsbVnHv3yxhyEpyHRp8Gt78zO5LU5+G94soI2GgXJ4KtHZt/q3rs/NIMo51C+EELIGaQuSIoEoZOVkA/6voSESaymTnrlPZWAVDLp1+2JMsPd6Kvow8QD9qYkSE/tc/JD+Tcdrats98W11w9o54SJ1GMr3xvzR/3oS7+f0NY6p8Rb62n6LVjf9T7Ivqoxap5oQ8fPUxYBG6M3tqAYm+vuiYfo9uNX//7EvPh1Yr65cimNcbou3zWPDt+a8eaae6ri1gTnKf5gQfLlI3Nw+Mbs3F7z7QIWJISQs8+UgsQf3HgQuoM1tPEaD+nYVx/yETi4w73SjipIgvxsugMyD1uMjKNOSV5WZx4HCWtKgszymCilHXyUMY3H7/U8ImC70dYJuWz3+BHkHSkBgw+NBF7/nqSMdbQXx6Ev/X5iu/SxSM46dq4dYgFFhOjK+wNl0X+0I9ezFCQyX1yLiI9DYf+nu2b14iWzuim/8fDj3Vye/2BurqyYT/4wzk+onG9vzL0/2kJl8IX5h+jqLEjWzJ3/vDMH402zenktMbA6W7443c09Sgghp5epBUk6DO1BWz12DsnK90nyzwlpetGAY7VesYmJxuIOcJ84XBLoHBvxfucEWSbFImHhnDsPey8vc4x2s26L8y/3+bk35gG6chJU7agr+lG0e/wofIj6sg/Tf8wacMk062n9qNXJKT+LPtXGNZNCsYy3nU/aY+Cj6E9FRLkP094q5oz2GzFtFSRiH+5ngr3Y99kDsydfyRy+NXt3/Y+13fjVTbPzzNvefzgy9+wY79sVM3z42vv1bM9sjaAIE5zfca7iq9eB5LkoXzr3KCGEnF7qgoR84KhEOyuNxCtFQk563ehC4yxRF2mEEEKWAQuSU8cxC5Lj4p6WnKA9QgghHyUsSE4diy9I5IlI/uqATxAIIYQsHhYkhBBCCFk6LEgIIYQQsnRYkBBCCCFkyayY/wM2XyDAPfoDaAAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector" Text="This will be the name of your account on GitHub.&#xA;    Your URL will be: https://github.com/1aaa121." TextMethod="AttributeText" TextSelector="&lt;webctrl tag='P' type='' /&gt;" />
+                            </scg:List>
+                          </uix:TargetAnchorable.Anchors>
+                        </uix:TargetAnchorable>
+                      </uix:NCheckState.Target>
+                    </uix:NCheckState>
+                  </ActivityAction>
+                </Catch>
+              </TryCatch.Catches>
+            </TryCatch>
           </Sequence>
         </ActivityAction>
       </uix:NApplicationCard.Body>
