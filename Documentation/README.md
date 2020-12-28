@@ -23,14 +23,22 @@ To Clone: `git clone https://github.com/UiPath-Project3-1/uipath-automation-6.gi
 ## Contributors
 ### Team 2
 <a href='https://github.com/andressiles'>Team Lead - Andres Siles-Loayza</a>
+
 <a href='https://github.com/antonyt96'>Anthony Tejada</a>
+
 <a href='https://github.com/jamesPan3'>James Panebianco</a>
+
 <a href='https://github.com/shakum25'>Shalei Kumar</a>
+
 <a href='https://github.com/schigit'>Shantel Chi</a>
 
 ### Team 3
 <a href='https://github.com/jjennings510'>Team Lead - Jacob Jennings</a>
+
 <a href='https://github.com/vrobweis'>Solution Architect - Vincent Weis</a>
+
 <a href='https://github.com/JAGibW'>Julie Gibson</a>
+
 <a href='https://github.com/MBachkabakian'>Michael Bachkabakian</a>
+
 <a href='https://github.com/foleyb25'>Brian Foley</a>
