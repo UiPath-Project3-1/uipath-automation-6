@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <Activity mc:Ignorable="sap sap2010" x:Class="Initialize_Applications" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:ra="clr-namespace:Revature_GitHub_ActivityLibrary.Authentication;assembly=Revature_GitHub_ActivityLibrary" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
@@ -8,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1697,1190</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1431,1161</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Initialization_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="36">
@@ -87,10 +86,9 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>Revature_GitHub_ActivityLibrary</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Open applications used in the process and do necessary initialization procedures (e.g., login)." DisplayName="Initialize All Applications" sap:VirtualizedContainerService.HintSize="873,1085" sap2010:WorkflowViewState.IdRef="Sequence_9">
+  <Sequence sap2010:Annotation.AnnotationText="Attaches the GitHub browser and check if the user is currently logged in. It will log out the user first if they are logged in and log back in with the given credentials. Recieves the configuration file and the current browser and returns the logged in GitHub page. " DisplayName="Initialize All Applications" sap:VirtualizedContainerService.HintSize="873,1096" sap2010:WorkflowViewState.IdRef="Sequence_9">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -98,13 +96,13 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log message (Initialize applications)" sap:VirtualizedContainerService.HintSize="831,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Opening applications...&quot;]" />
-    <uix:NApplicationCard sap2010:Annotation.AnnotationText="This activity will open a edge browser tab and output a browser argument that will be used throughout the rest of the workflows to make sure the same tab that was opened here is the one being used" AttachMode="ByInstance" DisplayName="Use Browser Edge: New tab" sap:VirtualizedContainerService.HintSize="831,831" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="Simulate" OutUiElement="[out_Application1]" Version="V1">
+    <uix:NApplicationCard sap2010:Annotation.AnnotationText="This activity will open an Edge browser tab and output a browser argument that will be used throughout the rest of the workflows to make sure the same tab that was opened here is the one being used" AttachMode="ByInstance" DisplayName="Use Browser Edge: New tab" sap:VirtualizedContainerService.HintSize="831,831" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="Simulate" OutUiElement="[out_Application1]" Version="V1">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="797,573" sap2010:WorkflowViewState.IdRef="Sequence_10">
+          <Sequence DisplayName="Log into Github with the correct credentials" sap:VirtualizedContainerService.HintSize="797,573" sap2010:WorkflowViewState.IdRef="Sequence_10">
             <Sequence.Variables>
               <Variable x:TypeArguments="ss:SecureString" Name="Pwd" />
               <Variable x:TypeArguments="x:String" Name="Username" />
@@ -116,7 +114,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <ra:GitHub_Web_CheckIfLoggedIn sap:VirtualizedContainerService.HintSize="755,22" sap2010:WorkflowViewState.IdRef="GitHub_Web_CheckIfLoggedIn_1" in_Browser="[out_Application1]" out_IsLoggedIn="[IsLoggedIn]" />
-            <If Condition="[IsLoggedIn]" sap:VirtualizedContainerService.HintSize="755,417" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[IsLoggedIn]" DisplayName="If - Check if user is logged in" sap:VirtualizedContainerService.HintSize="755,417" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
                 <Sequence sap:VirtualizedContainerService.HintSize="376,268" sap2010:WorkflowViewState.IdRef="Sequence_11">
                   <sap:WorkflowViewStateService.ViewState>
@@ -127,12 +125,8 @@
                   <ra:GitHub_Web_Logout sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="GitHub_Web_Logout_1" in_Browser="[out_Application1]" />
                   <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GitHub_Login workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Components\Initialize\GitHub_Login.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
-                      <InArgument x:TypeArguments="ui:UiElement" x:Key="in_Application">
-                        <mva:VisualBasicValue x:TypeArguments="ui:UiElement" ExpressionText="out_Application1" />
-                      </InArgument>
-                      <InArgument x:TypeArguments="x:String" x:Key="in_Credential">
-                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;GithubCredential&quot;).ToString" />
-                      </InArgument>
+                      <InArgument x:TypeArguments="ui:UiElement" x:Key="in_Application">[out_Application1]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_Credential">[in_Config("GithubCredential").ToString]</InArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>
                 </Sequence>
@@ -140,12 +134,8 @@
               <If.Else>
                 <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GitHub_Login workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Components\Initialize\GitHub_Login.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
-                    <InArgument x:TypeArguments="ui:UiElement" x:Key="in_Application">
-                      <mva:VisualBasicValue x:TypeArguments="ui:UiElement" ExpressionText="out_Application1" />
-                    </InArgument>
-                    <InArgument x:TypeArguments="x:String" x:Key="in_Credential">
-                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;GithubCredential&quot;).ToString" />
-                    </InArgument>
+                    <InArgument x:TypeArguments="ui:UiElement" x:Key="in_Application">[out_Application1]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_Credential">[in_Config("GithubCredential").ToString]</InArgument>
                   </ui:InvokeWorkflowFile.Arguments>
                 </ui:InvokeWorkflowFile>
               </If.Else>

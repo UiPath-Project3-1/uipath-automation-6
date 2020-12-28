@@ -9,7 +9,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>933,1728</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1431,1703</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GitHub_Login_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="36">
@@ -91,7 +91,7 @@
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="This workflow logs into GitHub by getting credential information, attempting to log into GitHub with the library activity, and prompting the user to handle 2FA if the warning appears." DisplayName="GitHub_Login" sap:VirtualizedContainerService.HintSize="761,1623" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="This workflow logs into GitHub by accepting credential information, attempting to log into GitHub with the library activity, and prompting the user to handle 2FA if the warning appears. It takes in the UIElement representing the current browser and the credentials needed to log into Github. " DisplayName="GitHub_Login" sap:VirtualizedContainerService.HintSize="761,1638" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="ss:SecureString" Name="Pwd" />
       <Variable x:TypeArguments="x:String" Name="Username" />
