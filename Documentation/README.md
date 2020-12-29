@@ -14,7 +14,8 @@ This process will create a GitHub organization with the name and contact email p
 
 ## Getting Started
 To Clone: `git clone https://github.com/UiPath-Project3-1/uipath-automation-6.git`
-- You will need an **xlsx** file which contains two columns with the headers *Username* and *IsOwner*. The values in the *Username* column should only be the username a persons Github account, not their URL. As for the *IsOwner* column, indicate whether or not that user is an owner of your organization by using the values **TRUE** or **FALSE**.
+- You will need a valid GitHub account for the robot to login to and create the organization with.
+- You will need an **xlsx** file which contains two columns with the headers *Username* and *IsOwner*. The values in the *Username* column should only be the username for a person's Github account, not their URL. As for the *IsOwner* column, indicate whether or not that user is an owner of your organization by using the values **TRUE** or **FALSE**.
 
 ## Usage
 - To run this project from UiPath Studio, follow these steps:
