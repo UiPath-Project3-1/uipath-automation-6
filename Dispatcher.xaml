@@ -7,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>654,1294</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>740.8,1948.8</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="43">
@@ -90,11 +90,11 @@
       <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
       <AssemblyReference>Revature_GitHub_ActivityLibrary</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Retrieves transaction items by putting them into the out_TransactionData data table as DataRows. After setting up the list of members to add to the organization, it then creates new Github Organization based on the given name and contact email. This workflow takes in the configuration settings and outputs the organization name and datatable with the list of members to add.&#xD;&#xA;Exceptions: Username column doesn't exist. " DisplayName="Dispatcher" sap:VirtualizedContainerService.HintSize="605,1819" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Retrieves transaction items by putting them into the out_TransactionData data table as DataRows. After setting up the list of members to add to the organization, it then creates new Github Organization based on the given name and contact email. This workflow takes in the configuration settings and outputs the organization name and datatable with the list of members to add.&#xA;Exceptions: Username column doesn't exist. " DisplayName="Dispatcher" sap:VirtualizedContainerService.HintSize="602.4,1844" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="WorkbookPath" />
       <Variable x:TypeArguments="x:String" Default="Sheet1" Name="WorkbookSheetName" />
@@ -110,7 +110,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetUserInput workflow" sap:VirtualizedContainerService.HintSize="563,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Components\Initialize\GetUserInput.xaml">
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetUserInput workflow" sap:VirtualizedContainerService.HintSize="560.8,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Components\Initialize\GetUserInput.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <OutArgument x:TypeArguments="x:String" x:Key="out_OrganizationName">[out_OrganizationName]</OutArgument>
         <OutArgument x:TypeArguments="x:String" x:Key="out_OrganizationBusiness">[BusinessName]</OutArgument>
@@ -118,19 +118,19 @@
         <OutArgument x:TypeArguments="x:String" x:Key="out_WorkbookPath">[WorkbookPath]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Always" DisplayName="Use Browser Edge" sap:VirtualizedContainerService.HintSize="563,361" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="Simulate" OpenMode="Always" OutUiElement="[Browser]" Version="V1">
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Always" DisplayName="Use Browser Edge" sap:VirtualizedContainerService.HintSize="560.8,364" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="Simulate" OpenMode="Always" OutUiElement="[Browser]" Version="V1">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Create New GitHub Organization" sap:VirtualizedContainerService.HintSize="242,145" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Create New GitHub Organization" sap:VirtualizedContainerService.HintSize="241.6,147.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateNewOrganization workflow" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Components\Initialize\CreateNewOrganization.xaml">
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateNewOrganization workflow" sap:VirtualizedContainerService.HintSize="200,52.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Components\Initialize\CreateNewOrganization.xaml">
               <ui:InvokeWorkflowFile.Arguments>
                 <InArgument x:TypeArguments="x:String" x:Key="in_Credential">[in_Config("GithubCredential").ToString]</InArgument>
                 <InArgument x:TypeArguments="x:String" x:Key="in_ContactEmail">[ContactEmail]</InArgument>
@@ -152,13 +152,13 @@
         <uix:TargetApp BrowserType="Edge" IconBase64="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" InformativeScreenshot="a0bc1e5f1c73c9887362929ac41816db.png" Selector="&lt;html app='msedge.exe' title='New tab'/&gt;" Url="edge://newtab/" />
       </uix:NApplicationCard.TargetApp>
     </uix:NApplicationCard>
-    <Sequence DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="563,987" sap2010:WorkflowViewState.IdRef="Sequence_12">
+    <Sequence DisplayName="Get Transaction Data" sap:VirtualizedContainerService.HintSize="560.8,1001.6" sap2010:WorkflowViewState.IdRef="Sequence_12">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <TryCatch sap2010:Annotation.AnnotationText="This attempts to read in data from an Excel workbook. If one is not found, it will try to read from a CSV file." DisplayName="Try Catch - Read Input Sheet" sap:VirtualizedContainerService.HintSize="521,123" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch sap2010:Annotation.AnnotationText="This attempts to read in data from an Excel workbook. If one is not found, it will try to read from a CSV file." DisplayName="Try Catch - Read Input Sheet" sap:VirtualizedContainerService.HintSize="519.2,128.8" sap2010:WorkflowViewState.IdRef="TryCatch_1">
         <TryCatch.Variables>
           <Variable x:TypeArguments="x:Int32" Name="index" />
         </TryCatch.Variables>
@@ -195,7 +195,7 @@
           </Catch>
         </TryCatch.Catches>
       </TryCatch>
-      <ui:ForEach x:TypeArguments="sd:DataColumn" CurrentIndex="{x:Null}" DisplayName="While - Edit Transaction Data" sap:VirtualizedContainerService.HintSize="521,51" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[TransactionData.Columns]">
+      <ui:ForEach x:TypeArguments="sd:DataColumn" CurrentIndex="{x:Null}" DisplayName="While - Edit Transaction Data" sap:VirtualizedContainerService.HintSize="519.2,52.8" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[TransactionData.Columns]">
         <ui:ForEach.Body>
           <ActivityAction x:TypeArguments="sd:DataColumn">
             <ActivityAction.Argument>
@@ -287,20 +287,20 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:ForEach>
-      <If Condition="[TransactionData.Columns(&quot;Username&quot;) is Nothing]" DisplayName="If - Look for username label" sap:VirtualizedContainerService.HintSize="521,393" sap2010:WorkflowViewState.IdRef="If_7">
+      <If Condition="[TransactionData.Columns(&quot;Username&quot;) is Nothing]" DisplayName="If - Look for username label" sap:VirtualizedContainerService.HintSize="519.2,397.6" sap2010:WorkflowViewState.IdRef="If_7">
         <If.Then>
-          <Sequence sap:VirtualizedContainerService.HintSize="376,245" sap2010:WorkflowViewState.IdRef="Sequence_13">
+          <Sequence DisplayName="Throw error" sap:VirtualizedContainerService.HintSize="375.2,248" sap2010:WorkflowViewState.IdRef="Sequence_13">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;Username column doesn't exist.&quot;]" />
-            <Throw Exception="[new SystemException(&quot;Username column doesn't exist.&quot;)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;Username column doesn't exist.&quot;]" />
+            <Throw Exception="[new InvalidDataException(&quot;Username column doesn't exist.&quot;)]" sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="Throw_1" />
           </Sequence>
         </If.Then>
       </If>
-      <If Condition="[TransactionData.Columns(&quot;IsOwner&quot;) is Nothing]" DisplayName="If- Look for owner label" sap:VirtualizedContainerService.HintSize="521,208" sap2010:WorkflowViewState.IdRef="If_6">
+      <If Condition="[TransactionData.Columns(&quot;IsOwner&quot;) is Nothing]" DisplayName="If- Look for owner label" sap:VirtualizedContainerService.HintSize="519.2,209.6" sap2010:WorkflowViewState.IdRef="If_6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -308,11 +308,11 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <If.Then>
-          <ui:AddDataColumn x:TypeArguments="x:String" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="IsOwner" DataTable="[TransactionData]" DefaultValue="[False.ToString()]" DisplayName="Add OwnerCheck Column" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" />
+          <ui:AddDataColumn x:TypeArguments="x:String" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="IsOwner" DataTable="[TransactionData]" DefaultValue="[False.ToString()]" DisplayName="Add OwnerCheck Column" sap:VirtualizedContainerService.HintSize="200,22.4" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" />
         </If.Then>
       </If>
     </Sequence>
-    <Assign DisplayName="Assign - Pass out Transaction Data" sap:VirtualizedContainerService.HintSize="563,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+    <Assign DisplayName="Assign - Pass out Transaction Data" sap:VirtualizedContainerService.HintSize="560.8,60" sap2010:WorkflowViewState.IdRef="Assign_7">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[out_TransactionData]</OutArgument>
       </Assign.To>
