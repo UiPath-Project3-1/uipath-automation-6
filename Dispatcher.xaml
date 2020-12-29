@@ -130,11 +130,21 @@
             </sap:WorkflowViewStateService.ViewState>
             <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateNewOrganization workflow" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Components\Initialize\CreateNewOrganization.xaml">
               <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="x:String" x:Key="in_Credential">[in_Config("GithubCredential").ToString]</InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="in_ContactEmail">[ContactEmail]</InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="in_OrganizationName">[out_OrganizationName]</InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="in_BusinessName">[BusinessName]</InArgument>
-                <InArgument x:TypeArguments="ui:UiElement" x:Key="in_Browser">[Browser]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Credential">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;GithubCredential&quot;).ToString" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_ContactEmail">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="ContactEmail" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_BusinessName">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="BusinessName" />
+                </InArgument>
+                <InArgument x:TypeArguments="ui:UiElement" x:Key="in_Browser">
+                  <mva:VisualBasicValue x:TypeArguments="ui:UiElement" ExpressionText="Browser" />
+                </InArgument>
+                <InOutArgument x:TypeArguments="x:String" x:Key="io_OrganizationName">
+                  <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="out_OrganizationName" />
+                </InOutArgument>
               </ui:InvokeWorkflowFile.Arguments>
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -261,10 +271,10 @@
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:IsMatch BuilderPattern="email" DisplayName="Is Match" sap:VirtualizedContainerService.HintSize="483.2,60" sap2010:WorkflowViewState.IdRef="IsMatch_5" Input="[col.ColumnName]" IsBuilderTabModified="True" Model="[{&quot;Index&quot;:0,&quot;OperationID&quot;:&quot;LIT&quot;,&quot;OperationName&quot;:&quot;Literal&quot;,&quot;OperationValue&quot;:&quot;email&quot;,&quot;QuantifierFirstValue&quot;:&quot;1&quot;,&quot;QuantifierID&quot;:&quot;EXT&quot;,&quot;QuantifierName&quot;:&quot;Exactly&quot;,&quot;QuantifierSecondValue&quot;:null}]" Pattern="owner" RegexOption="IgnoreCase" Result="[IsOwnerCheck]" />
-                <If Condition="[IsOwnerCheck]" sap:VirtualizedContainerService.HintSize="483.2,209.6" sap2010:WorkflowViewState.IdRef="If_5">
+                <ui:IsMatch BuilderPattern="email" DisplayName="Is Match" sap:VirtualizedContainerService.HintSize="484,59" sap2010:WorkflowViewState.IdRef="IsMatch_5" Input="[col.ColumnName]" IsBuilderTabModified="True" Model="[{&quot;Index&quot;:0,&quot;OperationID&quot;:&quot;LIT&quot;,&quot;OperationName&quot;:&quot;Literal&quot;,&quot;OperationValue&quot;:&quot;email&quot;,&quot;QuantifierFirstValue&quot;:&quot;1&quot;,&quot;QuantifierID&quot;:&quot;EXT&quot;,&quot;QuantifierName&quot;:&quot;Exactly&quot;,&quot;QuantifierSecondValue&quot;:null}]" Pattern="owner" RegexOption="IgnoreCase" Result="[IsOwnerCheck]" />
+                <If Condition="[IsOwnerCheck]" sap:VirtualizedContainerService.HintSize="484,208" sap2010:WorkflowViewState.IdRef="If_5">
                   <If.Then>
-                    <Assign sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+                    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_8">
                       <Assign.To>
                         <OutArgument x:TypeArguments="x:String">[col.ColumnName]</OutArgument>
                       </Assign.To>

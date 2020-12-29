@@ -52,7 +52,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="36">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="72">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -89,6 +89,7 @@
       <AssemblyReference>Revature_GitHub_ActivityLibrary_Expressions_5732385</AssemblyReference>
       <AssemblyReference>Revature_GitHub_ActivityLibrary_Expressions_21061707</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="This workflow logs into GitHub by accepting credential information, attempting to log into GitHub with the library activity, and prompting the user to handle 2FA if the warning appears. It takes in the UIElement representing the current browser and the credentials needed to log into Github. " DisplayName="GitHub_Login" sap:VirtualizedContainerService.HintSize="761,1638" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -147,6 +148,7 @@
             </If.Else>
           </If>
           <If Condition="[ChosenButton.Contains(&quot;Cancel&quot;)]" DisplayName="If - Cancel Button was pressed" sap:VirtualizedContainerService.HintSize="641,207" sap2010:WorkflowViewState.IdRef="If_3">
+          <If Condition="[ChosenButton isNot Nothing andAlso ChosenButton.Contains(&quot;Cancel&quot;)]" sap:VirtualizedContainerService.HintSize="483.2,209.6" sap2010:WorkflowViewState.IdRef="If_3">
             <If.Then>
               <Throw Exception="[new ApplicationException(&quot;User ceased process in GitHub_Login workflow.&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
             </If.Then>
@@ -154,9 +156,6 @@
           <ra:GitHub_Web_CheckIfLoggedIn sap:VirtualizedContainerService.HintSize="641,22" sap2010:WorkflowViewState.IdRef="GitHub_Web_CheckIfLoggedIn_2" in_Browser="[in_Application]" out_IsLoggedIn="[IsLoggedIn]" />
         </Sequence>
       </ui:InterruptibleDoWhile.Body>
-      <ui:InterruptibleDoWhile.Condition>
-        <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="Not IsLoggedIn" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_1" />
-      </ui:InterruptibleDoWhile.Condition>
     </ui:InterruptibleDoWhile>
   </Sequence>
 </Activity>
