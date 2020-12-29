@@ -2,6 +2,7 @@
 *PackageCache.json
 *ProjectSettings.json
 *Exception_Screenshots/
+*Exceptions_Screenshots/
 *.settings/
 *.cache
 *.props
