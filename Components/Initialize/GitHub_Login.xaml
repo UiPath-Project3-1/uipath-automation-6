@@ -9,7 +9,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>804,1746.4</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1103,1743</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GitHub_Login_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="36">
@@ -92,7 +92,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="This workflow logs into GitHub by getting credential information, attempting to log into GitHub with the library activity, and prompting the user to handle 2FA if the warning appears." DisplayName="GitHub_Login" sap:VirtualizedContainerService.HintSize="761,1623" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="This workflow logs into GitHub by accepting credential information, attempting to log into GitHub with the library activity, and prompting the user to handle 2FA if the warning appears. It takes in the UIElement representing the current browser and the credentials needed to log into Github. " DisplayName="GitHub_Login" sap:VirtualizedContainerService.HintSize="761,1638" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="ss:SecureString" Name="Pwd" />
       <Variable x:TypeArguments="x:String" Name="Username" />
@@ -113,9 +113,9 @@
         <OutArgument x:TypeArguments="ss:SecureString" x:Key="out_Password">[Pwd]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <rn:GitHub_Web_NavigateTo_HomePage sap:VirtualizedContainerService.HintSize="560,22.4" sap2010:WorkflowViewState.IdRef="GitHub_Web_NavigateTo_HomePage_1" in_Browser="[in_Application]" />
-    <ra:GitHub_Web_CheckIfLoggedIn sap:VirtualizedContainerService.HintSize="560,22.4" sap2010:WorkflowViewState.IdRef="GitHub_Web_CheckIfLoggedIn_1" in_Browser="[in_Application]" out_IsLoggedIn="[IsLoggedIn]" />
-    <ui:InterruptibleDoWhile Condition="[Not IsLoggedIn]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="560,1093.6" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+    <rn:GitHub_Web_NavigateTo_HomePage sap:VirtualizedContainerService.HintSize="719,22" sap2010:WorkflowViewState.IdRef="GitHub_Web_NavigateTo_HomePage_1" in_Browser="[in_Application]" />
+    <ra:GitHub_Web_CheckIfLoggedIn sap:VirtualizedContainerService.HintSize="719,22" sap2010:WorkflowViewState.IdRef="GitHub_Web_CheckIfLoggedIn_1" in_Browser="[in_Application]" out_IsLoggedIn="[IsLoggedIn]" />
+    <ui:InterruptibleDoWhile DisplayName="Do While - User is logged in" sap:VirtualizedContainerService.HintSize="719,1082" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
       <ui:InterruptibleDoWhile.Body>
         <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="683,917" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <Sequence.Variables>
@@ -126,13 +126,13 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <If Condition="[IsLoggedIn]" sap:VirtualizedContainerService.HintSize="641,207" sap2010:WorkflowViewState.IdRef="If_2">
+          <If Condition="[IsLoggedIn]" DisplayName="If - User is logged in" sap:VirtualizedContainerService.HintSize="641,207" sap2010:WorkflowViewState.IdRef="If_2">
             <If.Then>
               <ra:GitHub_Web_Logout sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="GitHub_Web_Logout_1" in_Browser="[in_Application]" />
             </If.Then>
           </If>
           <ra:GitHub_Web_Login sap:VirtualizedContainerService.HintSize="641,22" sap2010:WorkflowViewState.IdRef="GitHub_Web_Login_1" in_Browser="[in_Application]" in_Password="[Pwd]" in_Username="[Username]" out_2FADidAppear="[Did2FAAppear]" />
-          <If Condition="[Did2FAAppear]" sap:VirtualizedContainerService.HintSize="641,207" sap2010:WorkflowViewState.IdRef="If_1">
+          <If Condition="[Did2FAAppear]" DisplayName="If - 2FA Appeared" sap:VirtualizedContainerService.HintSize="641,207" sap2010:WorkflowViewState.IdRef="If_1">
             <If.Then>
               <ui:MessageBox Caption="{x:Null}" Buttons="OkCancel" ChosenButton="[ChosenButton]" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[String.Format(&quot;2FA prompt appeared. Insert code, and click ok on this box only after you've successfully authenticated. {0} Click cancel to force close the process if you cannot complete the 2FA prompt to force-stop this process.&quot;, vbnewline)]" />
             </If.Then>
@@ -147,6 +147,7 @@
               </Assign>
             </If.Else>
           </If>
+          <If Condition="[ChosenButton.Contains(&quot;Cancel&quot;)]" DisplayName="If - Cancel Button was pressed" sap:VirtualizedContainerService.HintSize="641,207" sap2010:WorkflowViewState.IdRef="If_3">
           <If Condition="[ChosenButton isNot Nothing andAlso ChosenButton.Contains(&quot;Cancel&quot;)]" sap:VirtualizedContainerService.HintSize="483.2,209.6" sap2010:WorkflowViewState.IdRef="If_3">
             <If.Then>
               <Throw Exception="[new ApplicationException(&quot;User ceased process in GitHub_Login workflow.&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
