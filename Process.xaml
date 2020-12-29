@@ -12,7 +12,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1431,1379</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>654,1336</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="40">
@@ -107,7 +107,7 @@
       <AssemblyReference>Revature_GitHub_ActivityLibrary_Expressions_21061707</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke GitHub library activities that add each user to the generated organization for the training batch.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="610,1314" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke GitHub library activities that add each user to the generated organization for the training batch.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="610,1231" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="Username" />
       <Variable x:TypeArguments="x:Boolean" Name="AddAsOwner" />
@@ -157,7 +157,7 @@
         </If>
       </Sequence>
     </Sequence>
-    <TryCatch DisplayName="Try Catch- Add the user to the GitHub organization" sap:VirtualizedContainerService.HintSize="568,288" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch- Add the user to the GitHub organization" sap:VirtualizedContainerService.HintSize="568,205" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
         <ro:GitHub_Web_AddUserToOrg DisplayName="GitHub - AddUserToOrganization" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="GitHub_Web_AddUserToOrg_1" in_AddAsOwner="[AddAsOwner]" in_Browser="[in_Application1]" in_GHUsername="[Username]" in_OrgName="[in_OrgName]" />
       </TryCatch.Try>
@@ -176,10 +176,10 @@
             <Throw DisplayName="Throw - BusinessRuleException" Exception="[new BusinessRuleException(&quot;Username does not exist or was not found.&quot;, exception)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
           </ActivityAction>
         </Catch>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,104" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
