@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="GitHub_Login" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:ra="clr-namespace:Revature_GitHub_ActivityLibrary.Authentication;assembly=Revature_GitHub_ActivityLibrary" xmlns:rn="clr-namespace:Revature_GitHub_ActivityLibrary.Navigation;assembly=Revature_GitHub_ActivityLibrary" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="GitHub_Login" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:ra="clr-namespace:Revature_GitHub_ActivityLibrary.Authentication;assembly=Revature_GitHub_ActivityLibrary" xmlns:rn="clr-namespace:Revature_GitHub_ActivityLibrary.Navigation;assembly=Revature_GitHub_ActivityLibrary" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ssa="clr-namespace:System.Security.Authentication;assembly=System" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_Application" Type="InArgument(ui:UiElement)" />
     <x:Property Name="in_Credential" Type="InArgument(x:String)" />
@@ -9,7 +9,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>740.8,1456</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>740.8,1562.4</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GitHub_Login_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="36">
@@ -89,9 +89,10 @@
       <AssemblyReference>Revature_GitHub_ActivityLibrary_Expressions_5732385</AssemblyReference>
       <AssemblyReference>Revature_GitHub_ActivityLibrary_Expressions_21061707</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="This workflow logs into GitHub by getting credential information, attempting to log into GitHub with the library activity, and prompting the user to handle 2FA if the warning appears." DisplayName="GitHub_Login" sap:VirtualizedContainerService.HintSize="375.2,1351.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="This workflow logs into GitHub by getting credential information, attempting to log into GitHub with the library activity, and prompting the user to handle 2FA if the warning appears." DisplayName="GitHub_Login" sap:VirtualizedContainerService.HintSize="375.2,1457.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="ss:SecureString" Name="Pwd" />
       <Variable x:TypeArguments="x:String" Name="Username" />
@@ -114,9 +115,9 @@
     </ui:InvokeWorkflowFile>
     <rn:GitHub_Web_NavigateTo_HomePage sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="GitHub_Web_NavigateTo_HomePage_1" in_Browser="[in_Application]" />
     <ra:GitHub_Web_CheckIfLoggedIn sap:VirtualizedContainerService.HintSize="333.6,22.4" sap2010:WorkflowViewState.IdRef="GitHub_Web_CheckIfLoggedIn_1" in_Browser="[in_Application]" out_IsLoggedIn="[IsLoggedIn]" />
-    <ui:InterruptibleDoWhile Condition="[Not IsLoggedIn]" DisplayName="Do While - User is not logged in" sap:VirtualizedContainerService.HintSize="333.6,771.2" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+    <ui:InterruptibleDoWhile DisplayName="Do While - User is not logged in" sap:VirtualizedContainerService.HintSize="333.6,877.6" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
       <ui:InterruptibleDoWhile.Body>
-        <Sequence DisplayName="Login" sap:VirtualizedContainerService.HintSize="241.6,604" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence DisplayName="Login" sap:VirtualizedContainerService.HintSize="241.6,710.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:String" Name="ChosenButton" />
           </Sequence.Variables>
@@ -137,7 +138,70 @@
               <ra:GitHub_Web_Logout sap:VirtualizedContainerService.HintSize="200,22.4" sap2010:WorkflowViewState.IdRef="GitHub_Web_Logout_1" in_Browser="[in_Application]" />
             </If.Then>
           </If>
-          <ra:GitHub_Web_Login sap:VirtualizedContainerService.HintSize="200,22.4" sap2010:WorkflowViewState.IdRef="GitHub_Web_Login_1" in_Browser="[in_Application]" in_Password="[Pwd]" in_Username="[Username]" out_2FADidAppear="[Did2FAAppear]" />
+          <TryCatch sap2010:Annotation.AnnotationText="Try GitHub login. Catch InvalidCredentialException and retry logging in with new credentials." DisplayName="Try Catch - GitHub Login " sap:VirtualizedContainerService.HintSize="200,128.8" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <ra:GitHub_Web_Login sap:VirtualizedContainerService.HintSize="200,22.4" sap2010:WorkflowViewState.IdRef="GitHub_Web_Login_1" in_Browser="[in_Application]" in_Password="[Pwd]" in_Username="[Username]" out_2FADidAppear="[Did2FAAppear]" />
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="ssa:InvalidCredentialException" sap:VirtualizedContainerService.HintSize="403.2,22.4" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="ssa:InvalidCredentialException">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="ssa:InvalidCredentialException" Name="exception" />
+                  </ActivityAction.Argument>
+                  <ui:RetryScope sap2010:Annotation.AnnotationText="Retry logging in with new credentials until no exceptions are thrown." DisplayName="Retry Login" sap:VirtualizedContainerService.HintSize="333.6,380.8" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="10">
+                    <ui:RetryScope.ActivityBody>
+                      <ActivityAction>
+                        <Sequence sap2010:Annotation.AnnotationText="Delete the invalid credentials from Windows Credentials Manager and prompt the user for new ones. Then, try logging in again." DisplayName="Login with new credentials" sap:VirtualizedContainerService.HintSize="200,160.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ReplaceInvalidCredentials workflow" sap:VirtualizedContainerService.HintSize="378.4,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Components\Initialize\ReplaceInvalidCredentials.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <InOutArgument x:TypeArguments="ss:SecureString" x:Key="io_Password">
+                                <mva:VisualBasicReference x:TypeArguments="ss:SecureString" ExpressionText="Pwd" />
+                              </InOutArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_Username">
+                                <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="Username" />
+                              </InOutArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_Credential">
+                                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Credential" />
+                              </InArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                          </ui:InvokeWorkflowFile>
+                          <ra:GitHub_Web_Login sap:VirtualizedContainerService.HintSize="378.4,22.4" sap2010:WorkflowViewState.IdRef="GitHub_Web_Login_2" in_Browser="[in_Application]" in_Password="[Pwd]" in_Username="[Username]" out_2FADidAppear="[Did2FAAppear]" />
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:RetryScope.ActivityBody>
+                    <ui:RetryScope.Condition>
+                      <ActivityFunc x:TypeArguments="x:Boolean" />
+                    </ui:RetryScope.Condition>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:RetryScope>
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
           <If sap2010:Annotation.AnnotationText="If 2FA appears, ask user to authenticate" Condition="[Did2FAAppear]" DisplayName="If - 2FA Appeared" sap:VirtualizedContainerService.HintSize="200,96.8" sap2010:WorkflowViewState.IdRef="If_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -175,6 +239,9 @@
           <ra:GitHub_Web_CheckIfLoggedIn sap:VirtualizedContainerService.HintSize="200,22.4" sap2010:WorkflowViewState.IdRef="GitHub_Web_CheckIfLoggedIn_2" in_Browser="[in_Application]" out_IsLoggedIn="[IsLoggedIn]" />
         </Sequence>
       </ui:InterruptibleDoWhile.Body>
+      <ui:InterruptibleDoWhile.Condition>
+        <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="Not IsLoggedIn" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_1" />
+      </ui:InterruptibleDoWhile.Condition>
     </ui:InterruptibleDoWhile>
   </Sequence>
 </Activity>
