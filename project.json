@@ -1,6 +1,6 @@
 {
-  "name": "GitHub Organization Generator",
-  "description": "Process to automate the production of a GitHub organization.",
+  "name": "Create GitHub Organization",
+  "description": "Creates a GitHub organization and adds GitHub usernames as members or owners.",
   "main": "Main.xaml",
   "dependencies": {
     "Revature_GitHub_ActivityLibrary": "[1.0.2]",
