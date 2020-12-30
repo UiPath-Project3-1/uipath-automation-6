@@ -1,6 +1,6 @@
 {
   "name": "Create GitHub Organization",
-  "description": "Creates a GitHub organization and adds GitHub usernames as members or owners.",
+  "description": "Creates a GitHub organization and adds GitHub usernames as members or owners. Requires a valid GitHub account, the name of the organization, and an xlsx/csv file containing the GitHub usernames to add and whether they should be added as owner.",
   "main": "Main.xaml",
   "dependencies": {
     "Revature_GitHub_ActivityLibrary": "[1.0.2]",
