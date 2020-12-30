@@ -3,7 +3,7 @@
   "description": "Process to automate the production of a GitHub organization.",
   "main": "Main.xaml",
   "dependencies": {
-    "Revature_GitHub_ActivityLibrary": "[1.0.1]",
+    "Revature_GitHub_ActivityLibrary": "[1.0.2]",
     "UiPath.Credentials.Activities": "[1.1.6479.13204]",
     "UiPath.Excel.Activities": "[2.9.3]",
     "UiPath.Form.Activities": "[1.1.8]",
